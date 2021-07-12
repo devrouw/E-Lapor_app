@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">E-Lapor</string>
+    <string name="txt_attention">Sampaikan laporan Anda secara langsung kepada instansi pemerintah berwenang</string>
+    <string name="txt_email">Masukkan email</string>
+    <string name="txt_sandi">Masukkan kata sandi</string>
+    <string name="txt_forgot_pass">Lupa Kata Sandi?</string>
+    <string name="txt_masuk">Masuk</string>
+    <string name="txt_blm_punya_akun">Belum memiliki akun?</string>
+    <string name="txt_daftar">Daftar</string>
+    <string name="txt_isikan_biodata">Isikan biodata diri anda</string>
+    <string name="txt_nik">NIK</string>
+    <string name="txt_nama_lengkap">Nama Lengkap</string>
+    <string name="txt_dd">DD</string>
+    <string name="txt_month">MONTH</string>
+    <string name="txt_year">YEAR</string>
+    <string name="txt_tempat_lahir">Tempat Lahir</string>
+    <string name="txt_jenis_kelamin">Jenis Kelamin</string>
+    <string name="txt_alamat">Alamat</string>
+    <string name="txt_email_2">Email</string>
+    <string name="txt_no_telepon">No Telepon</string>
+    <string name="txt_kode_pos">Kode Pos</string>
+    <string name="txt_kabupaten">Kabupaten/Kota</string>
+    <string name="txt_kecamatan">Kecamatan</string>
+    <string name="txt_kelurahan">Kelurahan</string>
+    <string name="txt_unggah_foto">Unggah Foto</string>
+    <string name="txt_no_telp">0813xxxxxxxx</string>
+    <string name="txt_isi_detail">Isi Detail Aduan Anda</string>
+    <string name="txt_dinas">Dinas</string>
+    <string name="txt_pesan">Pesan*</string>
+    <string name="txt_wajib">*Wajib diisi</string>
+    <string name="txt_no_telp_dihub">Nomor telepon yang dapat dihubungi*</string>
+    <string name="txt_no_telp_hanya">*Nomor telepon hanya dapat dilihat oleh petugas</string>
+    <string name="txt_lokasi">Lokasi</string>
+    <string name="txt_kategori">Kategori</string>
+    <string name="txt_kirim">Kirim</string>
+    <string name="txt_update">Update</string>
+    <string name="txt_edit_biodata">Edit Biodata</string>
+    <string name="txt_judul">Judul</string>
+    <string name="txt_laporan">telah mengomentari laporan anda</string>
+    <string-array name="jenis_kelamin">
+        <item>Perempuan</item>
+        <item>Laki-Laki</item>
+    </string-array>
+</resources>
