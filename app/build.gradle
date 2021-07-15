@@ -84,6 +84,12 @@ dependencies {
     //Log Dependencies
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
+    //Maps
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v9:0.12.0'
+    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:9.6.1'){
+        exclude group: 'group_name', module: 'module_name'
+    }
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

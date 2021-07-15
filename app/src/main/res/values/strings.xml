@@ -41,4 +41,20 @@
         <item>Perempuan</item>
         <item>Laki-Laki</item>
     </string-array>
+    <string-array name="dinas">
+        <item>Dinas Lingkungan Hidup</item>
+    </string-array>
+    <string-array name="kategori">
+        <item>Sampah</item>
+        <item>Limbah</item>
+        <item>Kebakaran</item>
+        <item>Hutan</item>
+    </string-array>
+    <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
+    <string name="location_picker_place_name_result">Place name: %1$s</string>
+    <string name="location_picker_select_location_button_select">Pilih Lokasi</string>
+    <string name="location_picker_select_location_button_cancel">Batal</string>
+    <string name="move_map_instruction">Arahkan marker ke posisi yang diinginkan</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoibmFkeWFpaHphOTgiLCJhIjoiY2tyNHE2bG1jMmE0aDJ1bzdiY2Z5andtbCJ9.3jFiViuEHeRuOF9BVSZclA</string>
 </resources>

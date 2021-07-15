@@ -1,5 +1,6 @@
 package com.lollipop.e_lapor.service.network
 
+import com.lollipop.e_lapor.service.model.DinasData
 import com.lollipop.e_lapor.service.model.KirimData
 import com.lollipop.e_lapor.service.model.LoginData
 import retrofit2.http.Field
@@ -47,4 +48,10 @@ interface ShaNetwork {
         @Field("kategori") kategori : String,
         @Field("id_dinas") id_dinas : String
     ) : KirimData
+
+    @FormUrlEncoded
+    @POST("api.php")
+    suspend fun listDinas(
+        @Field("case") case : String
+    ) : DinasData
 }

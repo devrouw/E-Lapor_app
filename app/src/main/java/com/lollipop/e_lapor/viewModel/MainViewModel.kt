@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lollipop.e_lapor.repository.MainRepository
-import com.lollipop.e_lapor.service.model.Aduan
-import com.lollipop.e_lapor.service.model.Akun
-import com.lollipop.e_lapor.service.model.KirimData
-import com.lollipop.e_lapor.service.model.LoginData
+import com.lollipop.e_lapor.service.model.*
 import com.lollipop.e_lapor.util.ResultOfNetwork
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -19,11 +16,13 @@ class MainViewModel : ViewModel() {
     val daftarAkun: LiveData<ResultOfNetwork<KirimData>>
     val login: LiveData<ResultOfNetwork<LoginData>>
     val kirimAduan: LiveData<ResultOfNetwork<KirimData>>
+    val dinasData: LiveData<ResultOfNetwork<DinasData>>
 
     init {
         this.daftarAkun = _repository.dataResult
         this.login = _repository.loginResult
         this.kirimAduan = _repository.aduanResult
+        this.dinasData = _repository.dinasResult
     }
 
     fun loginAkun(case: String, email: String, password: String){
@@ -107,6 +106,35 @@ class MainViewModel : ViewModel() {
                             )
                     }
                     else -> _repository.aduanResult
+                        .postValue(ResultOfNetwork.Failure("[Unknown] error ${throwable.message} please retry", throwable))
+                }
+            }
+        }
+    }
+
+    fun listDinas(case: String){
+        viewModelScope.launch {
+            try {
+                _repository.listDinas(case)
+            }catch (throwable: Throwable){
+                when (throwable) {
+                    is IOException -> _repository.dinasResult
+                        .postValue(
+                            ResultOfNetwork.Failure(
+                                "[IO] error ${throwable.message} please retry",
+                                throwable
+                            )
+                        )
+                    is HttpException -> {
+                        _repository.dinasResult
+                            .postValue(
+                                ResultOfNetwork.Failure(
+                                    "[HTTP] error ${throwable.message} please retry",
+                                    throwable
+                                )
+                            )
+                    }
+                    else -> _repository.dinasResult
                         .postValue(ResultOfNetwork.Failure("[Unknown] error ${throwable.message} please retry", throwable))
                 }
             }

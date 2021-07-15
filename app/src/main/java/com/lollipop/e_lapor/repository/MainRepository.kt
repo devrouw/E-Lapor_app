@@ -1,10 +1,7 @@
 package com.lollipop.e_lapor.repository
 
 import androidx.lifecycle.MutableLiveData
-import com.lollipop.e_lapor.service.model.Aduan
-import com.lollipop.e_lapor.service.model.Akun
-import com.lollipop.e_lapor.service.model.KirimData
-import com.lollipop.e_lapor.service.model.LoginData
+import com.lollipop.e_lapor.service.model.*
 import com.lollipop.e_lapor.service.network.RetrofitClient
 import com.lollipop.e_lapor.util.ResultOfNetwork
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +11,7 @@ class MainRepository() {
     val dataResult = MutableLiveData<ResultOfNetwork<KirimData>>()
     val loginResult = MutableLiveData<ResultOfNetwork<LoginData>>()
     val aduanResult = MutableLiveData<ResultOfNetwork<KirimData>>()
+    val dinasResult = MutableLiveData<ResultOfNetwork<DinasData>>()
 
     suspend fun daftarAkun(case: String, akun: Akun) =
         withContext(Dispatchers.IO){
@@ -34,6 +32,14 @@ class MainRepository() {
             aduanResult.postValue(ResultOfNetwork.Success(
                 RetrofitClient.ftp.inputAduan(case,aduan.nik,aduan.foto_aduan,aduan.pesan,aduan.no_telpon,
                     aduan.lng,aduan.lat,aduan.kategori,aduan.id_dinas)
+            ))
+        }
+    }
+
+    suspend fun listDinas(case: String){
+        withContext(Dispatchers.IO){
+            dinasResult.postValue(ResultOfNetwork.Success(
+                RetrofitClient.ftp.listDinas(case)
             ))
         }
     }

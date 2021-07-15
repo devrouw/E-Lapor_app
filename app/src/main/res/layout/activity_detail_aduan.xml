@@ -90,15 +90,15 @@
                 android:textColor="@color/white"
                 android:text="@string/txt_dinas"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <Spinner
                 android:id="@+id/sp_dinas"
                 android:layout_marginTop="4dp"
-                android:paddingStart="14dp"
                 android:fontFamily="@font/arlrdbd"
                 android:textColor="@color/blue_200"
                 android:layout_below="@id/tv_dinas"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:entries="@array/dinas"
                 android:background="@drawable/bg_white_square"/>
 
             <TextView
@@ -194,6 +194,9 @@
                         android:layout_marginTop="4dp"
                         android:layout_below="@id/tv_lokasi"
                         android:layout_width="match_parent"
+                        android:enabled="false"
+                        android:textSize="11sp"
+                        android:paddingHorizontal="10dp"
                         android:layout_height="30dp"
                         android:background="@drawable/bg_white_square"/>
 
@@ -213,23 +216,33 @@
                         android:textColor="@color/white"
                         android:text="@string/txt_kategori"/>
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <Spinner
                         android:id="@+id/sp_kategori"
                         android:layout_marginTop="4dp"
                         android:layout_below="@id/tv_kategori"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
+                        android:entries="@array/kategori"
                         android:background="@drawable/bg_white_square"/>
                 </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <ImageView
+        android:id="@+id/iv_map"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_baseline_map_24"
+        app:layout_constraintTop_toBottomOf="@id/sv_container"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_kirim"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/arlrdbd"
         android:textColor="@color/blue_500"
         android:textAllCaps="false"
