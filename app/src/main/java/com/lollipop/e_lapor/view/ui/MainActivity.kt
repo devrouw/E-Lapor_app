@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         with(_binding){
             ivMenu.setOnClickListener {
-                drawerLayout.openDrawer(GravityCompat.END)
+                openDrawer()
             }
         }
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fr_container, fragment)
         transaction.commit()
@@ -64,6 +64,14 @@ class MainActivity : AppCompatActivity() {
 
         transaction.addToBackStack(tag)
         transaction.commit()
+    }
+
+    fun openDrawer(){
+        _binding.drawerLayout.openDrawer(GravityCompat.END)
+    }
+
+    fun closeDrawer(){
+        _binding.drawerLayout.closeDrawer(GravityCompat.END)
     }
 
 }

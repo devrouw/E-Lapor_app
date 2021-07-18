@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cl_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="10dp"
+    android:background="@color/blue_500"
+    android:paddingVertical="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/tv_judul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:fontFamily="@font/arlrdbd"
@@ -17,11 +20,11 @@
         android:text="@string/txt_judul"/>
 
     <TextView
-        android:id="@+id/tv_placeholder"
+        android:id="@+id/tv_keterangan"
         app:layout_constraintTop_toBottomOf="@id/tv_judul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         android:fontFamily="@font/arlrdbd"
         android:textColor="@color/blue_200"
@@ -31,10 +34,10 @@
         android:id="@+id/tv_kategori"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="10sp"
         android:layout_marginStart="5dp"
         app:layout_constraintTop_toBottomOf="@id/tv_judul"
-        app:layout_constraintStart_toEndOf="@id/tv_placeholder"
+        app:layout_constraintStart_toEndOf="@id/tv_keterangan"
         android:fontFamily="@font/arlrdbd"
         android:textColor="@color/white"
         android:text="@string/txt_judul"/>
@@ -44,6 +47,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_kategori"
+        app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_baseline_image_not_supported"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

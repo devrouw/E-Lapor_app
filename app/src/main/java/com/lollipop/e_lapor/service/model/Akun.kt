@@ -14,4 +14,5 @@ data class Akun(
     val kecamatan: String = "",
     val kelurahan: String = "",
     val foto_profil: String = "",
+    val nama_foto: String = "",
 )

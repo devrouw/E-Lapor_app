@@ -3,28 +3,31 @@ package com.lollipop.e_lapor.view.ui
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.database.Cursor
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.widget.ArrayAdapter
+import android.util.Base64
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.lollipop.e_lapor.databinding.ActivityDetailAduanBinding
 import com.lollipop.e_lapor.service.model.Aduan
-import com.lollipop.e_lapor.service.model.DinasData
-import com.lollipop.e_lapor.service.model.DinasResult
 import com.lollipop.e_lapor.util.Constant
 import com.lollipop.e_lapor.util.DateFormatLocale
+import com.lollipop.e_lapor.util.ImageUtils
 import com.lollipop.e_lapor.util.ResultOfNetwork
 import com.lollipop.e_lapor.viewModel.DataStoreViewModel
 import com.lollipop.e_lapor.viewModel.MainViewModel
 import timber.log.Timber
+import java.io.ByteArrayOutputStream
 import java.io.File
 
-
+@Suppress("DEPRECATION")
 class DetailAduanActivity : AppCompatActivity() {
 
     val CAMERA_CODE = 10
@@ -39,6 +42,8 @@ class DetailAduanActivity : AppCompatActivity() {
     private var _nik = ""
     private var _lng = ""
     private var _lat = ""
+    private var _imageBase = ""
+    private var _imageName = ""
 
     private lateinit var filePhoto: File
     private val FILE_NAME = DateFormatLocale.getDateTimeNow()
@@ -62,7 +67,8 @@ class DetailAduanActivity : AppCompatActivity() {
             btKirim.setOnClickListener {
                 _viewModel.kirim("input_aduan", Aduan(
                     _nik,
-                    "novi.jpg",
+                    "${_imageBase}",
+                    "${_imageName}",
                     "${etPesan.text}",
                     "${etNotelp.text}",
                     _lng,
@@ -134,12 +140,26 @@ class DetailAduanActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == CAMERA_CODE && resultCode == Activity.RESULT_OK){
-            Timber.d("liat image ${filePhoto.absolutePath}")
             val takenPhoto = BitmapFactory.decodeFile(filePhoto.absolutePath)
+            val output1 = ByteArrayOutputStream()
+            takenPhoto.compress(Bitmap.CompressFormat.JPEG, 40, output1)
+            val byte_arr1 = output1.toByteArray()
+            _imageBase = Base64.encodeToString(byte_arr1, Base64.DEFAULT)
+            _imageName = filePhoto.name
+            Timber.d("image_URL ${_imageBase}")
             _binding.ivImage.setImageBitmap(takenPhoto)
         }
         if(requestCode == GALLERY_CODE && resultCode == Activity.RESULT_OK){
-            Timber.d("liat image ${data?.data}")
+            val filePath = data?.data?.let { getRealPathFromURI(it) }
+            val bitmap: Bitmap = ImageUtils.getInstant().getCompressedBitmap(filePath)
+            val output1 = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, output1)
+            val byte_arr1 = output1.toByteArray()
+            _imageBase = Base64.encodeToString(byte_arr1, Base64.DEFAULT)
+            if (filePath != null) {
+                _imageName = File(data.data!!.path).name
+            }
+            Timber.d("filepath ${filePath} filename ${_imageName}")
             _binding.ivImage.setImageURI(data?.data)
         }
         if(requestCode == LAUNCH_MAP_ACTIVITY && resultCode == Activity.RESULT_OK){
@@ -149,20 +169,24 @@ class DetailAduanActivity : AppCompatActivity() {
         }
     }
 
-//    private fun isSuccessNetworkDinas(code: Int, data: List<DinasResult>?) {
-//        when (code) {
-//            Constant.Network.REQUEST_NOT_FOUND -> {
-//                Toast.makeText(this, "Gagal mengambil data", Toast.LENGTH_SHORT).show()
-//            }
-//            Constant.Network.REQUEST_SUCCESS -> {
-//                val adapter: ArrayAdapter<DinasResult> = ArrayAdapter<DinasResult>(
-//                    this,
-//                    android.R.layout.simple_spinner_item, data
-//                )
-//                _binding.spDinas.adapter = adapter
-//            }
-//        }
-//    }
+    fun getRealPathFromURI(contentUri: Uri): String? {
+        var path: String? = null
+        val proj = arrayOf(MediaStore.MediaColumns.DATA)
+        val cursor: Cursor? = contentUri.let {
+            getApplicationContext().getContentResolver()
+                .query(it, proj, null, null, null)
+        }
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                val column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+                path = cursor.getString(column_index)
+            }
+        }
+        if (cursor != null) {
+            cursor.close()
+        }
+        return path
+    }
 
     private fun isSuccessNetworkCallback(code: Int) {
         when (code) {
