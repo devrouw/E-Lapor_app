@@ -14,21 +14,16 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.lollipop.e_lapor.databinding.DialogConfirmationBinding
 import com.lollipop.e_lapor.databinding.FragmentBiodataBinding
 import com.lollipop.e_lapor.service.model.Akun
 import com.lollipop.e_lapor.service.model.LoginResult
 import com.lollipop.e_lapor.util.Constant
 import com.lollipop.e_lapor.util.ImageUtils
 import com.lollipop.e_lapor.util.ResultOfNetwork
-import com.lollipop.e_lapor.view.adapter.PengaduanAdapter
-import com.lollipop.e_lapor.view.ui.DetailAduanActivity
 import com.lollipop.e_lapor.viewModel.DataStoreViewModel
 import com.lollipop.e_lapor.viewModel.MainViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -47,7 +42,6 @@ class EditDaftarFragment : Fragment() {
     private lateinit var _viewModelDataStore: DataStoreViewModel
     private lateinit var _viewModel: MainViewModel
     private lateinit var _mContext: Context
-    private lateinit var _adapter: PengaduanAdapter
 
     private var _nik = ""
     private var _imageBase = ""

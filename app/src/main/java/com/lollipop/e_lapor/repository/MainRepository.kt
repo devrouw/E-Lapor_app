@@ -65,10 +65,10 @@ class MainRepository() {
         }
     }
 
-    suspend fun detailPerbaikan(case: String, nik: String, id: String){
+    suspend fun detailPerbaikan(case: String, nik: String, id: String, idAduan: String){
         withContext(Dispatchers.IO){
             perbaikanList.postValue(ResultOfNetwork.Success(
-                RetrofitClient.ftp.detailPerbaikan(case, nik, id)
+                RetrofitClient.ftp.detailPerbaikan(case, nik, id, idAduan)
             ))
         }
     }

@@ -19,6 +19,7 @@ import com.lollipop.e_lapor.util.GlideUtil
 import com.lollipop.e_lapor.util.ResultOfNetwork
 import com.lollipop.e_lapor.view.adapter.PengaduanAdapter
 import com.lollipop.e_lapor.view.ui.DetailAduanActivity
+import com.lollipop.e_lapor.view.ui.MainActivity
 import com.lollipop.e_lapor.viewModel.DataStoreViewModel
 import com.lollipop.e_lapor.viewModel.MainViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -71,6 +72,19 @@ class ProfileFragment : Fragment() {
     private fun _initializeAdapter() {
         _binding.rvContent.layoutManager = GridLayoutManager(requireActivity(), 3)
         _adapter = PengaduanAdapter()
+        _adapter.setOnItemClickCallback(object : PengaduanAdapter.OnItemClickCallback{
+            override fun onItemClick(item: AduanResult) {
+                val fragment = DetailPerbaikanFragment()
+                val bundle = Bundle().apply {
+                    putString("id_perbaikan", item.id_perbaikan)
+                    putString("id_pengaduan", item.id)
+                }
+                fragment.arguments = bundle
+                (activity as MainActivity).addFragment(fragment)
+                (activity as MainActivity).isDetailOpen = true
+            }
+
+        })
         _binding.rvContent.adapter = _adapter
     }
 

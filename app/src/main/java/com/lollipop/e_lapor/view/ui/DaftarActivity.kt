@@ -3,7 +3,6 @@ package com.lollipop.e_lapor.view.ui
 import android.Manifest
 import android.annotation.TargetApi
 import android.app.Activity
-import android.app.ProgressDialog.show
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,8 +17,6 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.lollipop.e_lapor.databinding.ActivityDaftarBinding
 import com.lollipop.e_lapor.service.model.Akun

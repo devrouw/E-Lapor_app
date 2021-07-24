@@ -18,7 +18,7 @@
         android:text="Profil"
         android:fontFamily="@font/arlrdbd"
         android:textColor="@color/white"
-        android:textSize="26sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/tv_pemberitahuan"
@@ -31,7 +31,7 @@
         android:text="Pemberitahuan"
         android:fontFamily="@font/arlrdbd"
         android:textColor="@color/white"
-        android:textSize="26sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/tv_biodata"
@@ -44,7 +44,7 @@
         android:text="Edit Biodata"
         android:fontFamily="@font/arlrdbd"
         android:textColor="@color/white"
-        android:textSize="26sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/tv_logout"
@@ -57,6 +57,6 @@
         android:text="Logout"
         android:fontFamily="@font/arlrdbd"
         android:textColor="@color/white"
-        android:textSize="26sp" />
+        android:textSize="24sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

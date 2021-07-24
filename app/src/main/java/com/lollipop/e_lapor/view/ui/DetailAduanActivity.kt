@@ -74,7 +74,7 @@ class DetailAduanActivity : AppCompatActivity() {
                     _lng,
                     _lat,
                     spKategori.selectedItem.toString(),
-                    "${(spKategori.selectedItemPosition+1)}"
+                    "1"
                 )
                 )
             }

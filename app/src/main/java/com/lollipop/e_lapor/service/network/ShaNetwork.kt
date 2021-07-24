@@ -95,6 +95,7 @@ interface ShaNetwork {
     suspend fun detailPerbaikan(
         @Field("case") case : String,
         @Field("nik") nik : String,
-        @Field("id") id : String
+        @Field("id") id : String,
+        @Field("id_aduan") idAduan : String
     ) : PerbaikanData
 }
