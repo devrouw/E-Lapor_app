@@ -1,10 +1,14 @@
 package com.lollipop.e_lapor.view.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.lollipop.e_lapor.R
 import com.lollipop.e_lapor.databinding.ActivityLoginBinding
 import com.lollipop.e_lapor.service.model.LoginResult
 import com.lollipop.e_lapor.util.Constant
@@ -18,6 +22,9 @@ class LoginActivity:AppCompatActivity() {
     private lateinit var _viewModelDataStore: DataStoreViewModel
     private lateinit var _viewModel: MainViewModel
 
+    private var pswd = "hide"
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -37,6 +44,19 @@ class LoginActivity:AppCompatActivity() {
                     "${etPassword.text}"
                 )
             }
+
+            imgHidePass.setOnClickListener {
+                pswd = if (pswd == "hide") {
+                    etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                    imgHidePass.setImageResource(R.drawable.ic_baseline_visibility)
+                    "show"
+                } else {
+                    etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                    imgHidePass.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+                    "hide"
+                }
+            }
+
         }
 
         observableLiveData()

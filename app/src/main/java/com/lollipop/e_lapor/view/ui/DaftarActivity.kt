@@ -3,6 +3,7 @@ package com.lollipop.e_lapor.view.ui
 import android.Manifest
 import android.annotation.TargetApi
 import android.app.Activity
+import android.app.Dialog
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,10 +16,14 @@ import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Base64
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.lollipop.e_lapor.databinding.ActivityDaftarBinding
+import com.lollipop.e_lapor.databinding.DialogConfirmationBinding
+import com.lollipop.e_lapor.databinding.DialogSuccessRegisBinding
 import com.lollipop.e_lapor.service.model.Akun
 import com.lollipop.e_lapor.util.Constant
 import com.lollipop.e_lapor.util.ImageUtils
@@ -34,11 +39,14 @@ class DaftarActivity : AppCompatActivity() {
     val REQUEST_CODE = 100
     private val PERMISSION_CODE = 1001
     private lateinit var _binding: ActivityDaftarBinding
+    private lateinit var _dialogBinding: DialogSuccessRegisBinding
 
     private lateinit var _viewModel: MainViewModel
 
     private var _imageBase = ""
     private var _imageName = ""
+
+    private lateinit var _dialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +54,7 @@ class DaftarActivity : AppCompatActivity() {
         setContentView(_binding.root)
 
         initializeViewModel()
+        dialogBinding()
 
         with(_binding) {
             unggahFoto.setOnClickListener {
@@ -88,6 +97,20 @@ class DaftarActivity : AppCompatActivity() {
 
     }
 
+    private fun dialogBinding() {
+        _dialog = Dialog(this)
+        _dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        _dialog.setContentView(_dialogBinding.root)
+        _dialog.window?.setLayout((resources.displayMetrics.widthPixels), ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        with(_dialogBinding) {
+            btIya.setOnClickListener {
+                _dialog.dismiss()
+                finish()
+            }
+        }
+    }
+
     private fun observableLiveData() {
         _viewModel.daftarAkun.observe(this@DaftarActivity, { result ->
             when (result) {
@@ -103,6 +126,7 @@ class DaftarActivity : AppCompatActivity() {
 
     private fun initializeViewModel() {
         _viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        _dialogBinding = DialogSuccessRegisBinding.inflate(layoutInflater)
     }
 
     private fun openGalleryForImage() {
@@ -114,9 +138,6 @@ class DaftarActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
-//            if (Build.VERSION.SDK_INT >= 21) {
-//                handleImageOnKitkat(data)
-//            }
             val filePath = data?.data?.let { getRealPathFromURI(it) }
             val bitmap: Bitmap = ImageUtils.getInstant().getCompressedBitmap(filePath)
             val output1 = ByteArrayOutputStream()
@@ -138,9 +159,7 @@ class DaftarActivity : AppCompatActivity() {
                     .show()
             }
             Constant.Network.REQUEST_SUCCESS -> {
-                Toast.makeText(this@DaftarActivity, "Berhasil menyimpan data", Toast.LENGTH_SHORT)
-                    .show()
-                finish()
+                _dialog.show()
             }
         }
     }
@@ -181,21 +200,6 @@ class DaftarActivity : AppCompatActivity() {
         return path
     }
 
-    private fun renderImage(imagePath: String?){
-        if (imagePath != null) {
-            val bitmap = BitmapFactory.decodeFile(imagePath)
-            val output1 = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, output1)
-            val byte_arr1 = output1.toByteArray()
-            _imageBase = Base64.encodeToString(byte_arr1, Base64.DEFAULT)
-            _imageName = imagePath
-            Timber.d("image_URL ${_imageBase}")
-        }
-        else {
-            Timber.d("ImagePath is null")
-        }
-    }
-
     private fun getImagePath(uri: Uri?, selection: String?): String {
         var path: String? = null
         val cursor = uri?.let { contentResolver.query(it, null, selection, null, null ) }
@@ -206,39 +210,6 @@ class DaftarActivity : AppCompatActivity() {
             cursor.close()
         }
         return path!!
-    }
-
-    @TargetApi(19)
-    private fun handleImageOnKitkat(data: Intent?) {
-        var imagePath: String? = null
-        val uri = data!!.data
-        //DocumentsContract defines the contract between a documents provider and the platform.
-        if (DocumentsContract.isDocumentUri(this, uri)){
-            val docId = DocumentsContract.getDocumentId(uri)
-            if (uri != null) {
-                if ("com.android.providers.media.documents" == uri.authority){
-                    val id = docId.split(":")[1]
-                    val selsetion = MediaStore.Images.Media._ID + "=" + id
-                    imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        selsetion)
-                } else if (uri != null) {
-                    if ("com.android.providers.downloads.documents" == uri.authority){
-                        val contentUri = ContentUris.withAppendedId(Uri.parse(
-                            "content://downloads/public_downloads"), java.lang.Long.valueOf(docId))
-                        imagePath = getImagePath(contentUri, null)
-                    }
-                }
-            }
-        }
-        else if (uri != null) {
-            if ("content".equals(uri.scheme, ignoreCase = true)){
-                imagePath = getImagePath(uri, null)
-            }
-            else if ("file".equals(uri.scheme, ignoreCase = true)){
-                imagePath = uri.path
-            }
-        }
-        renderImage(imagePath)
     }
 
 }

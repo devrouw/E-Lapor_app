@@ -10,6 +10,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.lollipop.e_lapor.R
 import com.lollipop.e_lapor.databinding.FragmentBiodataBinding
 import com.lollipop.e_lapor.service.model.Akun
 import com.lollipop.e_lapor.service.model.LoginResult
@@ -46,6 +49,7 @@ class EditDaftarFragment : Fragment() {
     private var _nik = ""
     private var _imageBase = ""
     private var _imageName = ""
+    private var pswd = "hide"
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onAttach(context: Context) {
@@ -91,6 +95,18 @@ class EditDaftarFragment : Fragment() {
                     _imageBase,
                     _imageName
                 ))
+            }
+
+            imgHidePass.setOnClickListener {
+                pswd = if (pswd == "hide") {
+                    etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                    imgHidePass.setImageResource(R.drawable.ic_baseline_visibility_blue)
+                    "show"
+                } else {
+                    etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                    imgHidePass.setImageResource(R.drawable.ic_baseline_visibility_off_blue)
+                    "hide"
+                }
             }
         }
 

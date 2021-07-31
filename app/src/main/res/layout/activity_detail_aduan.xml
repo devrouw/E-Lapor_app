@@ -80,27 +80,6 @@
                     android:background="@color/white"/>
             </LinearLayout>
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_dinas"-->
-<!--                android:layout_below="@id/ll_capture"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/arlrdbd"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:text="@string/txt_dinas"/>-->
-
-<!--            <Spinner-->
-<!--                android:id="@+id/sp_dinas"-->
-<!--                android:layout_marginTop="4dp"-->
-<!--                android:fontFamily="@font/arlrdbd"-->
-<!--                android:textColor="@color/blue_200"-->
-<!--                android:layout_below="@id/tv_dinas"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:entries="@array/dinas"-->
-<!--                android:background="@drawable/bg_white_square"/>-->
-
             <TextView
                 android:id="@+id/tv_pesan"
                 android:layout_below="@id/ll_capture"
@@ -173,10 +152,10 @@
                 android:layout_below="@id/tv_notelp_hanya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"
                     android:layout_height="wrap_content">
@@ -189,23 +168,37 @@
                         android:textColor="@color/white"
                         android:text="@string/txt_lokasi"/>
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_lokasi"
-                        android:layout_marginTop="4dp"
-                        android:layout_below="@id/tv_lokasi"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:enabled="false"
-                        android:textSize="11sp"
-                        android:paddingHorizontal="10dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/bg_white_square"/>
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_lokasi"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/et_lokasi"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="5"
+                            android:layout_width="0dp"
+                            android:enabled="false"
+                            android:textSize="12sp"
+                            android:textColor="@color/blue_500"
+                            android:paddingHorizontal="10dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/bg_white_square"/>
+
+                        <ImageView
+                            android:id="@+id/iv_map"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_baseline_pin_drop_24"/>
+                    </LinearLayout>
 
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content">
 
                     <TextView
@@ -220,26 +213,16 @@
                         android:id="@+id/sp_kategori"
                         android:layout_marginTop="4dp"
                         android:layout_below="@id/tv_kategori"
-                        android:layout_width="match_parent"
+                        android:layout_width="160dp"
                         android:layout_height="30dp"
                         android:entries="@array/kategori"
                         android:background="@drawable/bg_white_square"/>
                 </RelativeLayout>
             </LinearLayout>
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <ImageView
-        android:id="@+id/iv_map"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_baseline_map_24"
-        app:layout_constraintTop_toBottomOf="@id/sv_container"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_kirim"
+        android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
@@ -248,7 +231,9 @@
         android:textAllCaps="false"
         android:background="@drawable/bg_white_square"
         android:text="@string/txt_kirim"
-        app:layout_constraintTop_toBottomOf="@id/sv_container"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_below="@id/rl_lokasi"/>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

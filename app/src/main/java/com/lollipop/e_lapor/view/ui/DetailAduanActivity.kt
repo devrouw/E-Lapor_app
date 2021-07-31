@@ -165,7 +165,7 @@ class DetailAduanActivity : AppCompatActivity() {
         if(requestCode == LAUNCH_MAP_ACTIVITY && resultCode == Activity.RESULT_OK){
             _lng = data?.getStringExtra("lng").toString()
             _lat = data?.getStringExtra("lat").toString()
-            _binding.etLokasi.setText("${_lat},\n${_lng}")
+            _binding.etLokasi.setText("${_lat},${_lng}")
         }
     }
 
