@@ -18,9 +18,11 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.lollipop.e_lapor.R
 import com.lollipop.e_lapor.databinding.ActivityDaftarBinding
 import com.lollipop.e_lapor.databinding.DialogConfirmationBinding
 import com.lollipop.e_lapor.databinding.DialogSuccessRegisBinding
@@ -57,6 +59,9 @@ class DaftarActivity : AppCompatActivity() {
         dialogBinding()
 
         with(_binding) {
+            val jenisKelamin = arrayOf<String?>("Perempuan", "Laki-Laki")
+            spJenisKelamin.adapter = ArrayAdapter<String>(this@DaftarActivity, R.layout.spinner_list, jenisKelamin)
+
             unggahFoto.setOnClickListener {
                 //check permission at runtime
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
