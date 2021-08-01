@@ -87,6 +87,7 @@ class EditDaftarFragment : Fragment() {
                     "${spJenisKelamin.selectedItem}",
                     "${etAlamat.text}",
                     "${etEmail.text}",
+                    "${etPassword.text}",
                     "${etNoTelp.text}",
                     "${etKodePos.text}",
                     "${etKabupaten.text}",
@@ -177,6 +178,7 @@ class EditDaftarFragment : Fragment() {
                 _binding.etYy.setText(data?.get(0)?.tgl_lahir?.take(4))
                 _binding.etAlamat.setText(data?.get(0)?.alamat)
                 _binding.etEmail.setText(data?.get(0)?.email)
+                _binding.etPassword.setText(data?.get(0)?.password)
                 _binding.etNoTelp.setText(data?.get(0)?.no_telpon)
                 _binding.etKodePos.setText(data?.get(0)?.kode_pos)
                 _binding.etKabupaten.setText(data?.get(0)?.kabupaten)

@@ -8,6 +8,7 @@ data class Akun(
     val jenis_kelamin: String = "",
     val alamat: String = "",
     val email: String = "-",
+    val password: String = "-",
     val no_telepon: String = "",
     val kode_pos: String = "",
     val kabupaten: String = "",

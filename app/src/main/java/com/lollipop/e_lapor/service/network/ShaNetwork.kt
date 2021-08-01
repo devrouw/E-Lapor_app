@@ -52,6 +52,7 @@ interface ShaNetwork {
         @Field("jenis_kelamin") jenisKelamin : String,
         @Field("alamat") alamat : String,
         @Field("email") email : String,
+        @Field("password") password : String,
         @Field("no_telepon") noTelepon : String,
         @Field("kode_pos") kodePos : String,
         @Field("kabupaten") kabupaten : String,

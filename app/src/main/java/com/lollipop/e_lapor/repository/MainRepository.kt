@@ -36,7 +36,7 @@ class MainRepository() {
     suspend fun editAkun(case: String, akun: Akun) =
         dataResult.postValue(ResultOfNetwork.Success(
             RetrofitClient.ftp.editBiodata(case,akun.nik,akun.nama_lengkap, akun.tempat_lahir, akun.tanggal_lahir,
-                akun.jenis_kelamin, akun.alamat, akun.email, akun.no_telepon, akun.kode_pos, akun.kabupaten,
+                akun.jenis_kelamin, akun.alamat, akun.email, akun.password,akun.no_telepon, akun.kode_pos, akun.kabupaten,
                 akun.kecamatan, akun.kelurahan, akun.foto_profil, akun.nama_foto)
         ))
 

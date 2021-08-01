@@ -86,6 +86,7 @@ class DaftarActivity : AppCompatActivity() {
                         "${spJenisKelamin.selectedItem}",
                         "${etAlamat.text}",
                         "${etEmail.text}",
+                        "",
                         "${etNoTelp.text}",
                         "${etKodePos.text}",
                         "${etKabupaten.text}",
@@ -160,7 +161,7 @@ class DaftarActivity : AppCompatActivity() {
     private fun isSuccessNetworkCallback(code: Int) {
         when (code) {
             Constant.Network.REQUEST_NOT_FOUND -> {
-                Toast.makeText(this@DaftarActivity, "NIK sudah ada", Toast.LENGTH_SHORT)
+                Toast.makeText(this@DaftarActivity, "Terjadi Kesalahan", Toast.LENGTH_SHORT)
                     .show()
             }
             Constant.Network.REQUEST_SUCCESS -> {
