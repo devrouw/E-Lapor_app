@@ -161,7 +161,7 @@ class DaftarActivity : AppCompatActivity() {
     private fun isSuccessNetworkCallback(code: Int) {
         when (code) {
             Constant.Network.REQUEST_NOT_FOUND -> {
-                Toast.makeText(this@DaftarActivity, "Terjadi Kesalahan", Toast.LENGTH_SHORT)
+                Toast.makeText(this@DaftarActivity, "NIK Sudah Terdaftar", Toast.LENGTH_SHORT)
                     .show()
             }
             Constant.Network.REQUEST_SUCCESS -> {
