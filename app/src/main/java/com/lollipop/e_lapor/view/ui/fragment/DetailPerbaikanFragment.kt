@@ -87,8 +87,12 @@ class DetailPerbaikanFragment : Fragment() {
                     )
                     if(data.get(0).id_perbaikan.equals("0")){
                         _binding.rvDinas.visibility = View.GONE
-                        _binding.tvKeterangan.text = "belum mengomentari laporan anda"
+                        _binding.tvKeterangan.text = "Belum ada Komentar"
                     }else{
+                        if(data.get(0).keterangan == null){
+                            _binding.rvDinas.visibility = View.GONE
+                            _binding.tvKeterangan.text = "Belum ada Komentar"
+                        }
                         _binding.tvBalasan.setText(data.get(0).keterangan)
                         GlideUtil.buildDefaultGlide(
                             requireActivity(),"${Constant.URL.IMAGE_URL}${data.get(0).foto_perbaikan}",_binding.ivPerbaikan,

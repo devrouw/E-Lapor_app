@@ -76,7 +76,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/arlrdbd"
                 android:textColor="@color/blue_500"
-                android:text="Sampah menumpuk di sungai"
+                android:text="Belum ada Komentar"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
     </RelativeLayout>
@@ -118,7 +118,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/arlrdbd"
                 android:textColor="@color/blue_500"
-                android:text="Sampah menumpuk di sungai"
+                android:text="Belum ada Komentar"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
     </RelativeLayout>
