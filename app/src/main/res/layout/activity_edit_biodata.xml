@@ -15,10 +15,10 @@
         app:layout_constraintBottom_toBottomOf="parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        android:layout_marginBottom="100dp"
-        android:paddingHorizontal="30dp">
+        android:paddingBottom="100dp"
+        android:paddingHorizontal="20dp">
 
         <ImageView
             android:id="@+id/iv_logo"
