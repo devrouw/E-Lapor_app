@@ -230,10 +230,10 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getDetailPerbaikan(case: String, nik: String, id: String, idAduan: String){
+    fun getDetailPerbaikan(case: String, nik: String, idAduan: String){
         viewModelScope.launch {
             try {
-                _repository.detailPerbaikan(case, nik, id, idAduan)
+                _repository.detailPerbaikan(case, nik, idAduan)
             }catch (throwable: Throwable){
                 when (throwable) {
                     is IOException -> _repository.perbaikanList

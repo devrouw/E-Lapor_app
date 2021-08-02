@@ -25,7 +25,7 @@ class DetailPerbaikanFragment : Fragment() {
     private lateinit var _viewModelDataStore: DataStoreViewModel
     private lateinit var _viewModel: MainViewModel
 
-    private val _id by lazy { arguments?.getString("id_perbaikan").orEmpty() }
+//    private val _id by lazy { arguments?.getString("id_perbaikan").orEmpty() }
     private val _idAduan by lazy { arguments?.getString("id_pengaduan").orEmpty() }
 
     override fun onCreateView(
@@ -46,8 +46,8 @@ class DetailPerbaikanFragment : Fragment() {
 
     private fun observableLiveData() {
         _viewModelDataStore.userData.observe(viewLifecycleOwner, {
-            _viewModel.getDetailPerbaikan("detail_perbaikan",it[0], _id, _idAduan)
-            Timber.d("cek id ${it[0]} dan $_id dan $_idAduan")
+            _viewModel.getDetailPerbaikan("detail_perbaikan",it[0], _idAduan)
+//            Timber.d("cek id ${it[0]} dan $_id dan $_idAduan")
         })
 
         _viewModel.perbaikanData.observe(viewLifecycleOwner, {

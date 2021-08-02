@@ -76,7 +76,7 @@ class ProfileFragment : Fragment() {
             override fun onItemClick(item: AduanResult) {
                 val fragment = DetailPerbaikanFragment()
                 val bundle = Bundle().apply {
-                    putString("id_perbaikan", item.id_perbaikan_fk)
+//                    putString("id_perbaikan", item.id_perbaikan_fk)
                     putString("id_pengaduan", item.id_pengaduan)
                 }
                 fragment.arguments = bundle
