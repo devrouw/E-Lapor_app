@@ -57,6 +57,7 @@ class PemberitahuanFragment : Fragment() {
                 val fragment = DetailPerbaikanFragment()
                 val bundle = Bundle().apply {
                     putString("id_perbaikan", item.id_perbaikan)
+                    putString("id_pengaduan", item.id_aduan)
                 }
                 fragment.arguments = bundle
                 (activity as MainActivity).addFragment(fragment)

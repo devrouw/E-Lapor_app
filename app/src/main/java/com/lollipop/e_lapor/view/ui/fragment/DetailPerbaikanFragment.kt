@@ -32,7 +32,7 @@ class DetailPerbaikanFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _bindingFragment = FragmentDetailPerbaikanBinding.inflate(inflater,container,false)
         initializeViewModel()
         return _binding.root

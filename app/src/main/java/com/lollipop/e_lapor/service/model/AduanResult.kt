@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class AduanResult(
-    val id: String? = "-",
+    val id_pengaduan: String? = "-",
     val foto_aduan: String? = "-",
     val pesan: String? = "-",
     val no_telpon: String? = "-",
@@ -14,5 +14,5 @@ data class AduanResult(
     val id_dinas: String? = "-",
     val nik: String? = "-",
     val status: String? = "-",
-    val id_perbaikan: String? = "-",
+    val id_perbaikan_fk: String? = "-",
 )

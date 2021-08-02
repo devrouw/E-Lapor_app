@@ -1,8 +1,10 @@
 package com.lollipop.e_lapor.service.network
 
 import android.content.Context
+import com.google.gson.GsonBuilder
 import com.lollipop.e_lapor.view.ApplicationController
 import com.readystatesoftware.chuck.ChuckInterceptor
+import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
