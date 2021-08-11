@@ -6,10 +6,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
 import com.lollipop.e_lapor.BuildConfig
-import com.lollipop.e_lapor.repository.DataStoreRepository
 import com.lollipop.e_lapor.repository.PREFERENCE_NAME
 import timber.log.Timber
 import timber.log.Timber.DebugTree
+import com.lollipop.e_lapor.repository.DataStoreRepository as DataStoreRepository1
 
 
 class ApplicationController : Application() {
@@ -18,7 +18,7 @@ class ApplicationController : Application() {
         lateinit var appContext: Context
     }
 
-    lateinit var dataStoreRepository: DataStoreRepository
+    lateinit var dataStoreRepository: DataStoreRepository1
 
     override fun onCreate() {
         super.onCreate()
@@ -36,7 +36,7 @@ class ApplicationController : Application() {
             name = PREFERENCE_NAME
         )
 
-        dataStoreRepository = DataStoreRepository(dataStore)
+        dataStoreRepository = DataStoreRepository1(dataStore)
     }
 
 }

@@ -1,5 +1,6 @@
 package com.lollipop.e_lapor.view.ui
 
+import android.R
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +12,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
@@ -67,8 +69,8 @@ class DetailAduanActivity : AppCompatActivity() {
             btKirim.setOnClickListener {
                 _viewModel.kirim("input_aduan", Aduan(
                     _nik,
-                    "${_imageBase}",
-                    "${_imageName}",
+                    _imageBase,
+                    _imageName,
                     "${etPesan.text}",
                     "${etNotelp.text}",
                     _lng,
@@ -117,9 +119,34 @@ class DetailAduanActivity : AppCompatActivity() {
     private fun initializeViewModel() {
         _viewModelDataStore = ViewModelProvider(this).get(DataStoreViewModel::class.java)
         _viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        _viewModel.getListKategori("kategori")
     }
 
     private fun observableLiveData() {
+        _viewModel.kategoriData.observe(this,{ result ->
+            when(result){
+                is ResultOfNetwork.Success -> {
+                    when (result.value.code) {
+                        Constant.Network.REQUEST_NOT_FOUND -> {
+                            Toast.makeText(this, "Gagal mengambil data", Toast.LENGTH_SHORT).show()
+                        }
+                        Constant.Network.REQUEST_SUCCESS -> {
+                            val list = ArrayList<String>()
+                            result.value.data?.forEach {
+                                it.nama_kategori?.let { it1 -> list.add(it1) }
+                            }
+                            val _adapter = ArrayAdapter(this,
+                                com.lollipop.e_lapor.R.layout.spinner_list,list)
+                            _binding.spKategori.adapter = _adapter
+                        }
+                    }
+                }
+                is ResultOfNetwork.Failure -> {
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
         _viewModelDataStore.userData.observe(this, {
             _nik = it[0]
         })

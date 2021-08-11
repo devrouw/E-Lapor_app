@@ -93,6 +93,12 @@ interface ShaNetwork {
 
     @FormUrlEncoded
     @POST("api.php")
+    suspend fun listKategori(
+        @Field("case") case : String
+    ) : KategoriData
+
+    @FormUrlEncoded
+    @POST("api.php")
     suspend fun detailPerbaikan(
         @Field("case") case : String,
         @Field("nik") nik : String,

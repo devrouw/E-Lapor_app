@@ -18,13 +18,15 @@ class MainViewModel : ViewModel() {
     val kirimAduan: LiveData<ResultOfNetwork<KirimData>>
     val aduanData: LiveData<ResultOfNetwork<AduanData>>
     val perbaikanData: LiveData<ResultOfNetwork<PerbaikanData>>
+    val kategoriData: LiveData<ResultOfNetwork<KategoriData>>
 
     init {
         this.daftarAkun = _repository.dataResult
         this.login = _repository.loginResult
         this.kirimAduan = _repository.aduanResult
         this.aduanData = _repository.aduanList
-        perbaikanData = _repository.perbaikanList
+        this.perbaikanData = _repository.perbaikanList
+        this.kategoriData = _repository.kategoriResult
     }
 
     fun loginAkun(case: String, email: String, password: String){
@@ -253,6 +255,35 @@ class MainViewModel : ViewModel() {
                             )
                     }
                     else -> _repository.perbaikanList
+                        .postValue(ResultOfNetwork.Failure("[Unknown] error ${throwable.message} please retry", throwable))
+                }
+            }
+        }
+    }
+
+    fun getListKategori(case: String){
+        viewModelScope.launch {
+            try {
+                _repository.listKategori(case)
+            }catch (throwable: Throwable){
+                when (throwable) {
+                    is IOException -> _repository.kategoriResult
+                        .postValue(
+                            ResultOfNetwork.Failure(
+                                "[IO] error ${throwable.message} please retry",
+                                throwable
+                            )
+                        )
+                    is HttpException -> {
+                        _repository.kategoriResult
+                            .postValue(
+                                ResultOfNetwork.Failure(
+                                    "[HTTP] error ${throwable.message} please retry",
+                                    throwable
+                                )
+                            )
+                    }
+                    else -> _repository.kategoriResult
                         .postValue(ResultOfNetwork.Failure("[Unknown] error ${throwable.message} please retry", throwable))
                 }
             }

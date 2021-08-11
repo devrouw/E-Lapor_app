@@ -13,6 +13,7 @@ class MainRepository() {
     val aduanResult = MutableLiveData<ResultOfNetwork<KirimData>>()
     val aduanList = MutableLiveData<ResultOfNetwork<AduanData>>()
     val perbaikanList = MutableLiveData<ResultOfNetwork<PerbaikanData>>()
+    val kategoriResult = MutableLiveData<ResultOfNetwork<KategoriData>>()
 
     suspend fun daftarAkun(case: String, akun: Akun) =
         withContext(Dispatchers.IO){
@@ -69,6 +70,14 @@ class MainRepository() {
         withContext(Dispatchers.IO){
             perbaikanList.postValue(ResultOfNetwork.Success(
                 RetrofitClient.ftp.detailPerbaikan(case, nik, idAduan)
+            ))
+        }
+    }
+
+    suspend fun listKategori(case: String){
+        withContext(Dispatchers.IO){
+            kategoriResult.postValue(ResultOfNetwork.Success(
+                RetrofitClient.ftp.listKategori(case)
             ))
         }
     }
