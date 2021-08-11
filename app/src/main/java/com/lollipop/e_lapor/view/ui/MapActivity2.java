@@ -26,6 +26,8 @@ import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
 import com.mapbox.core.exceptions.ServicesException;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
@@ -85,6 +87,14 @@ public class MapActivity2 extends AppCompatActivity implements PermissionsListen
             Toast.makeText(
                     MapActivity2.this,
                     getString(R.string.move_map_instruction), Toast.LENGTH_SHORT).show();
+
+            CameraPosition position = new CameraPosition.Builder()
+                    .target(new LatLng(-1.239323, 116.851554))
+                    .zoom(12.0)
+                    .tilt(20.0)
+                    .build();
+
+            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 3000);
 
 // When user is still picking a location, we hover a marker above the mapboxMap in the center.
 // This is done by using an image view with the default marker found in the SDK. You can

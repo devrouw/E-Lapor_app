@@ -216,7 +216,17 @@
                         android:layout_below="@id/tv_kategori"
                         android:layout_width="160dp"
                         android:layout_height="30dp"
-                        android:entries="@array/kategori"
+                        android:background="@drawable/bg_white_square"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_kategori"
+                        android:layout_marginTop="4dp"
+                        android:layout_below="@id/sp_kategori"
+                        android:visibility="gone"
+                        android:textColor="@color/blue_500"
+                        android:paddingHorizontal="10dp"
+                        android:layout_width="160dp"
+                        android:layout_height="30dp"
                         android:background="@drawable/bg_white_square"/>
                 </RelativeLayout>
             </LinearLayout>

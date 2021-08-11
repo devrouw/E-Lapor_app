@@ -85,8 +85,19 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_pencil"
         android:backgroundTint="@color/white"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tulis Laporan \n Anda"
+        android:textAlignment="textEnd"
+        android:textColor="@color/white"
+        android:fontFamily="@font/arlrdbd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bt_add"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

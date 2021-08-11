@@ -12,6 +12,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +48,7 @@ class DetailAduanActivity : AppCompatActivity() {
     private var _lat = ""
     private var _imageBase = ""
     private var _imageName = ""
+    private var _lainnya = false
 
     private lateinit var filePhoto: File
     private val FILE_NAME = DateFormatLocale.getDateTimeNow()
@@ -58,6 +61,22 @@ class DetailAduanActivity : AppCompatActivity() {
         initializeViewModel()
 
         with(_binding){
+            spKategori.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    if(spKategori.selectedItem.toString().equals("Lainnya")){
+                        _lainnya = true
+                        etKategori.visibility = View.VISIBLE
+                    }else{
+                        _lainnya = false
+                        etKategori.visibility = View.GONE
+                    }
+                }
+
+            }
+
             btCamera.setOnClickListener {
                 openCameraForImage()
             }
@@ -67,18 +86,22 @@ class DetailAduanActivity : AppCompatActivity() {
             }
 
             btKirim.setOnClickListener {
-                _viewModel.kirim("input_aduan", Aduan(
-                    _nik,
-                    _imageBase,
-                    _imageName,
-                    "${etPesan.text}",
-                    "${etNotelp.text}",
-                    _lng,
-                    _lat,
-                    spKategori.selectedItem.toString(),
-                    "1"
-                )
-                )
+                val kategori = if (_lainnya) {
+                    etKategori.text.toString()
+                } else {
+                    spKategori.selectedItem.toString()
+                }
+                Timber.d("kategori $kategori")
+//                _viewModel.kirim("input_aduan", Aduan(
+//                    _nik,
+//                    _imageBase,
+//                    _imageName,
+//                    "${etPesan.text}",
+//                    "${etNotelp.text}",
+//                    _lng,
+//                    _lat,
+//                    kategori,
+//                    "1"))
             }
 
             ivMap.setOnClickListener {
