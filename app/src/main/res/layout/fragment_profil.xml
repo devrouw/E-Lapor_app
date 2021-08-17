@@ -92,12 +92,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tulis Laporan \n Anda"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/arlrdbd"
+        android:text="Tulis Laporan Anda"
         android:textAlignment="textEnd"
         android:textColor="@color/white"
-        android:fontFamily="@font/arlrdbd"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bt_add"/>
+        app:layout_constraintTop_toBottomOf="@id/bt_add" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
