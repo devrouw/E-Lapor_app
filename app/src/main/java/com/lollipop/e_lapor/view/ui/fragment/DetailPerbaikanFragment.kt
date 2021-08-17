@@ -99,6 +99,10 @@ class DetailPerbaikanFragment : Fragment() {
                             GlideUtil.CENTER_CROP,
                             R.drawable.ic_baseline_image_not_supported
                         )
+                        GlideUtil.buildDefaultGlide(
+                            requireActivity(),"${Constant.URL.TEMPLATE}${data.get(0).dp_dinas}",_binding.ivDinas,
+                            GlideUtil.CENTER_CROP
+                        )
                     }
                 }
             }

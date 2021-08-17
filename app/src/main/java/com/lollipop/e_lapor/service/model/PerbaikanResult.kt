@@ -12,5 +12,6 @@ data class PerbaikanResult(
     val keterangan: String? = "-",
     val kategori: String? = "-",
     val dinas: String? = "-",
+    val dp_dinas: String? = "-",
     val id_aduan: String? = "-",
 )

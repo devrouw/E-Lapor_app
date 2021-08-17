@@ -8,4 +8,5 @@ data class DinasResult(
     val username: String? = "-",
     val password: String? = "-",
     val dinas: String? = "-",
+    val dp_dinas: String? = "-",
 )
