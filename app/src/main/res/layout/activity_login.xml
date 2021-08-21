@@ -49,16 +49,16 @@
         android:inputType="textEmailAddress"
         tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/tv_forgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ly_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="40dp"
-        android:fontFamily="@font/arlrdbd"
-        android:textColor="@color/blue_200"
-        android:text="@string/txt_forgot_pass"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tv_forgot"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/ly_password"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginEnd="40dp"-->
+<!--        android:fontFamily="@font/arlrdbd"-->
+<!--        android:textColor="@color/blue_200"-->
+<!--        android:text="@string/txt_forgot_pass"/>-->
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ly_password"
@@ -107,7 +107,7 @@
         android:textColor="@color/blue_500"
         android:layout_marginTop="40dp"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@id/tv_forgot"/>
+        app:layout_constraintTop_toBottomOf="@id/ly_password"/>
 
     <TextView
         android:id="@+id/tv_no_akun"
