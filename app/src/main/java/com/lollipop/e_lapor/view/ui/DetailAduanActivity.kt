@@ -1,13 +1,16 @@
 package com.lollipop.e_lapor.view.ui
 
+import android.Manifest
 import android.R
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -37,6 +40,9 @@ class DetailAduanActivity : AppCompatActivity() {
     val CAMERA_CODE = 10
     val GALLERY_CODE = 11
     val LAUNCH_MAP_ACTIVITY = 100
+
+    val REQUEST_CODE = 100
+    private val PERMISSION_CODE = 1001
 
     private lateinit var _binding: ActivityDetailAduanBinding
 
@@ -78,11 +84,29 @@ class DetailAduanActivity : AppCompatActivity() {
             }
 
             btCamera.setOnClickListener {
-                openCameraForImage()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_DENIED){
+                        val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        requestPermissions(permissions, PERMISSION_CODE)
+                    } else{
+                        openCameraForImage()
+                    }
+                }else{
+                    openCameraForImage();
+                }
             }
 
             btGallery.setOnClickListener {
-                openGalleryForImage()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_DENIED){
+                        val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        requestPermissions(permissions, PERMISSION_CODE)
+                    } else{
+                        openGalleryForImage()
+                    }
+                }else{
+                    openGalleryForImage();
+                }
             }
 
             btKirim.setOnClickListener {
@@ -92,16 +116,16 @@ class DetailAduanActivity : AppCompatActivity() {
                     spKategori.selectedItem.toString()
                 }
                 Timber.d("kategori $kategori")
-//                _viewModel.kirim("input_aduan", Aduan(
-//                    _nik,
-//                    _imageBase,
-//                    _imageName,
-//                    "${etPesan.text}",
-//                    "${etNotelp.text}",
-//                    _lng,
-//                    _lat,
-//                    kategori,
-//                    "1"))
+                _viewModel.kirim("input_aduan", Aduan(
+                    _nik,
+                    _imageBase,
+                    _imageName,
+                    "${etPesan.text}",
+                    "${etNotelp.text}",
+                    _lng,
+                    _lat,
+                    kategori,
+                    "1"))
             }
 
             ivMap.setOnClickListener {
@@ -146,6 +170,16 @@ class DetailAduanActivity : AppCompatActivity() {
     }
 
     private fun observableLiveData() {
+        val loadingDialog = LoadingDialog(this)
+        _viewModel.progressBar.observe(this, {
+            Timber.d("progress bar $it")
+            if (it) {
+                loadingDialog.startLoadingDialog()
+            } else {
+                loadingDialog.dismiss()
+            }
+        })
+
         _viewModel.kategoriData.observe(this,{ result ->
             when(result){
                 is ResultOfNetwork.Success -> {
@@ -246,6 +280,23 @@ class DetailAduanActivity : AppCompatActivity() {
             Constant.Network.REQUEST_SUCCESS -> {
                 Toast.makeText(this, "Berhasil menyimpan data", Toast.LENGTH_SHORT).show()
                 finish()
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    openGalleryForImage()
+                }else{
+                    Toast.makeText(this,"Permission denied", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

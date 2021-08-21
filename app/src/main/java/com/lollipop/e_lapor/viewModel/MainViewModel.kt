@@ -19,6 +19,7 @@ class MainViewModel : ViewModel() {
     val aduanData: LiveData<ResultOfNetwork<AduanData>>
     val perbaikanData: LiveData<ResultOfNetwork<PerbaikanData>>
     val kategoriData: LiveData<ResultOfNetwork<KategoriData>>
+    val progressBar: LiveData<Boolean>
 
     init {
         this.daftarAkun = _repository.dataResult
@@ -27,6 +28,7 @@ class MainViewModel : ViewModel() {
         this.aduanData = _repository.aduanList
         this.perbaikanData = _repository.perbaikanList
         this.kategoriData = _repository.kategoriResult
+        this.progressBar = _repository.progressBar
     }
 
     fun loginAkun(case: String, email: String, password: String){
@@ -148,8 +150,10 @@ class MainViewModel : ViewModel() {
     fun kirim(case: String, aduan: Aduan){
         viewModelScope.launch {
             try {
+                _repository.progressBar.postValue(true)
                 _repository.kirimAduan(case, aduan)
             }catch (throwable: Throwable){
+                _repository.progressBar.postValue(false)
                 when (throwable) {
                     is IOException -> _repository.aduanResult
                         .postValue(

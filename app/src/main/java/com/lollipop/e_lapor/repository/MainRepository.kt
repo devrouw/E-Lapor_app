@@ -14,6 +14,7 @@ class MainRepository() {
     val aduanList = MutableLiveData<ResultOfNetwork<AduanData>>()
     val perbaikanList = MutableLiveData<ResultOfNetwork<PerbaikanData>>()
     val kategoriResult = MutableLiveData<ResultOfNetwork<KategoriData>>()
+    val progressBar = MutableLiveData<Boolean>()
 
     suspend fun daftarAkun(case: String, akun: Akun) =
         withContext(Dispatchers.IO){
@@ -47,6 +48,7 @@ class MainRepository() {
                 RetrofitClient.ftp.inputAduan(case,aduan.nik,aduan.nama_foto,aduan.foto_aduan,aduan.pesan,aduan.no_telpon,
                     aduan.lng,aduan.lat,aduan.kategori,aduan.id_dinas)
             ))
+            progressBar.postValue(false)
         }
     }
 
